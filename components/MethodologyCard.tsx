@@ -1,0 +1,120 @@
+"use client"
+
+import React from "react"
+import { Row, Col, Typography, Card, ConfigProvider, Flex, List } from "antd"
+import { BookOutlined, ExceptionOutlined, CheckOutlined } from "@ant-design/icons"
+import { MethodologyCardProps } from "@/types/methodology"
+
+const { Title, Paragraph, Text } = Typography
+
+const MethodologyCard = ({
+  icon,
+  title,
+  description,
+  features,
+  gradient,
+  borderColor,
+  iconBg,
+}: MethodologyCardProps) => (
+  <Card
+    hoverable
+    style={{
+      height: '100%',
+      borderRadius: '24px',
+      border: `2px solid ${borderColor}`,
+      background: gradient,
+      boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
+    }}
+    styles={{ body: { padding: '40px' } }}
+  >
+    <Flex vertical gap={24}>
+      <div 
+        style={{ 
+          width: '80px', 
+          height: '80px', 
+          backgroundColor: iconBg, 
+          borderRadius: '50%', 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center',
+          fontSize: '32px',
+          color: '#fff',
+          boxShadow: `0 8px 16px ${iconBg}40`
+        }}
+      >
+        {icon}
+      </div>
+
+      <div style={{ minHeight: '180px' }}>
+        <Title level={3} style={{ color: "#002B5B", marginBottom: '16px', marginTop: 0 }}>
+          {title}
+        </Title>
+        <Paragraph style={{ color: '#4B5563', fontSize: '1.05rem', lineHeight: 1.6 }}>
+          {description}
+        </Paragraph>
+      </div>
+
+      <List
+        dataSource={features}
+        renderItem={(item: string) => (
+          <List.Item style={{ border: 'none', padding: '4px 0', display: 'flex', alignItems: 'start' }}>
+            <CheckOutlined style={{ color: '#F4B400', marginRight: '12px', marginTop: '4px', fontWeight: 'bold' }} />
+            <Text style={{ color: '#6B7280' }}>{item}</Text>
+          </List.Item>
+        )}
+      />
+    </Flex>
+  </Card>
+)
+
+export function MethodologySection(): React.ReactElement {
+  const methodologies = [
+    {
+      icon: <BookOutlined />,
+      title: "Reforço Escolar Regular",
+      description:
+        "Para melhorar rendimento, foco e autonomia. Turmas de até 6 crianças em um ambiente colaborativo que estimula o aprendizado.",
+      features: ["Turmas reduzidas", "Foco no rendimento", "Desenvolvimento de autonomia"],
+      gradient: "linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%)",
+      borderColor: "rgba(0, 43, 91, 0.1)",
+      iconBg: "#002B5B",
+    },
+    {
+      icon: <ExceptionOutlined />,
+      title: "Educação Especial (DUA)",
+      description:
+        "Atendimento individualizado guiado pelo Desenho Universal da Aprendizagem. Adaptação de materiais e ritmo conforme a necessidade do aluno.",
+      features: ["Atendimento individualizado", "Materiais adaptados", "Ritmo personalizado"],
+      gradient: "linear-gradient(135deg, #ffffff 0%, #fff5f2 100%)",
+      borderColor: "#FF6B4A",
+      iconBg: "#FF6B4A",
+    },
+  ]
+
+  return (
+    <ConfigProvider theme={{ token: { borderRadius: 24 } }}>
+      <section style={{ padding: '100px 24px', backgroundColor: '#ffffff' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <Flex vertical gap={60}>
+            <div style={{ textAlign: 'center' }}>
+              <Title level={2} style={{ color: "#002B5B", fontSize: 'clamp(2rem, 5vw, 2.5rem)', marginBottom: '16px' }}>
+                Metodologia e Serviços
+              </Title>
+              <Paragraph style={{ fontSize: '1.2rem', color: '#6B7280', maxWidth: '700px', margin: '0 auto' }}>
+                Oferecemos dois tipos de atendimento para atender às necessidades específicas de cada aluno
+              </Paragraph>
+            </div>
+
+            <Row gutter={[32, 32]} justify="center">
+              {methodologies.map((method, index) => (
+                <Col xs={24} md={12} key={index}>
+                  <MethodologyCard {...method} />
+                </Col>
+              ))}
+            </Row>
+          </Flex>
+        </div>
+      </section>
+    </ConfigProvider>
+  )
+}
