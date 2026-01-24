@@ -27,7 +27,7 @@ const MethodologyCard = ({
     }}
     styles={{ body: { padding: '40px' } }}
   >
-    <Flex vertical gap={24}>
+    <Flex vertical gap={24} align="start">
       <div 
         style={{ 
           width: '80px', 
@@ -45,21 +45,32 @@ const MethodologyCard = ({
         {icon}
       </div>
 
-      <div style={{ minHeight: '180px' }}>
+      <div style={{ minHeight: '160px', textAlign: 'left', width: '100%' }}>
         <Title level={3} style={{ color: "#002B5B", marginBottom: '16px', marginTop: 0 }}>
           {title}
         </Title>
-        <Paragraph style={{ color: '#4B5563', fontSize: '1.05rem', lineHeight: 1.6 }}>
+        <Paragraph style={{ color: '#4B5563', fontSize: '1.05rem', lineHeight: 1.6, margin: 0 }}>
           {description}
         </Paragraph>
       </div>
 
       <List
+        style={{ width: '100%' }}
         dataSource={features}
         renderItem={(item: string) => (
-          <List.Item style={{ border: 'none', padding: '4px 0', display: 'flex', alignItems: 'start' }}>
-            <CheckOutlined style={{ color: '#F4B400', marginRight: '12px', marginTop: '4px', fontWeight: 'bold' }} />
-            <Text style={{ color: '#6B7280' }}>{item}</Text>
+          <List.Item 
+            style={{ 
+              border: 'none', 
+              padding: '6px 0', 
+              display: 'flex', 
+              justifyContent: 'flex-start',
+              alignItems: 'flex-start' 
+            }}
+          >
+            <Flex align="start" gap={12}>
+              <CheckOutlined style={{ color: '#F4B400', marginTop: '4px', fontWeight: 'bold' }} />
+              <Text style={{ color: '#6B7280', textAlign: 'left' }}>{item}</Text>
+            </Flex>
           </List.Item>
         )}
       />
@@ -68,7 +79,7 @@ const MethodologyCard = ({
 )
 
 export function MethodologySection(): React.ReactElement {
-  const methodologies = [
+  const methodologies: MethodologyCardProps[] = [
     {
       icon: <BookOutlined />,
       title: "Reforço Escolar Regular",
