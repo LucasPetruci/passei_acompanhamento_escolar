@@ -13,7 +13,7 @@ export function IntroSection(): React.ReactElement {
 
   const getShapeDimensions = () => {
     if (screens.lg) return { width: '50%', height: '50%' }
-    if (screens.md) return { width: '25%', height: '15%' }
+    if (screens.md) return { width: '20%', height: '10%' }
     return { width: '30%', height: '12%' }
   }
 
@@ -46,7 +46,7 @@ export function IntroSection(): React.ReactElement {
         <section 
           style={{ 
             position: 'relative', 
-            minHeight: '100vh', 
+            minHeight: screens.lg ? '80vh' : 'auto',
             display: 'flex', 
             alignItems: 'center', 
             overflow: 'hidden', 
