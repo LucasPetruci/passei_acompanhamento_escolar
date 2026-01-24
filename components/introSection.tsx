@@ -11,16 +11,25 @@ const { useBreakpoint } = Grid
 export function IntroSection(): React.ReactElement {
   const screens = useBreakpoint()
 
+  const getShapeDimensions = () => {
+    if (screens.lg) return { width: '50%', height: '50%' }
+    if (screens.md) return { width: '25%', height: '15%' }
+    return { width: '30%', height: '12%' }
+  }
+
+  const { width, height } = getShapeDimensions()
+
   const shapeStyle: React.CSSProperties = {
     position: 'absolute',
     top: 0,
     right: 0,
-    width: screens.lg ? '50%' : '35%',
-    height: screens.lg ? '50%' : '15%',
+    width,
+    height,
     backgroundColor: '#002B5B',
     borderBottomLeftRadius: '100%',
     zIndex: 0,
-    pointerEvents: 'none'
+    pointerEvents: 'none',
+    transition: 'all 0.3s ease'
   }
 
   return (
@@ -42,18 +51,18 @@ export function IntroSection(): React.ReactElement {
             alignItems: 'center', 
             overflow: 'hidden', 
             backgroundColor: '#ffffff',
-            padding: screens.lg ? '0' : '80px 0'
+            padding: screens.lg ? '0' : '60px 0 40px'
           }}
         >
           <div style={shapeStyle} />
 
           <div style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', padding: '0 24px', zIndex: 10 }}>
-            <Row gutter={[48, 64]} align="middle" justify="center">
+            <Row gutter={[48, 48]} align="middle" justify="center">
               <Col xs={24} lg={12} style={{ textAlign: screens.lg ? 'left' : 'center' }}>
                 <Title 
                   style={{ 
                     color: "#002B5B", 
-                    fontSize: "clamp(2.5rem, 8vw, 4rem)", 
+                    fontSize: "clamp(2.2rem, 7vw, 4rem)", 
                     fontWeight: 800, 
                     lineHeight: 1.1, 
                     marginBottom: '24px',
@@ -66,13 +75,13 @@ export function IntroSection(): React.ReactElement {
                 <Text 
                   style={{ 
                     display: 'block', 
-                    fontSize: screens.lg ? "1.25rem" : "1.15rem", 
+                    fontSize: screens.lg ? "1.25rem" : "1.1rem", 
                     color: "#4B5563", 
                     marginBottom: '40px',
                     maxWidth: screens.lg ? '500px' : '100%',
-                    marginLeft: screens.lg ? '0' : 'auto',
-                    marginRight: screens.lg ? '0' : 'auto',
-                    lineHeight: 1.6
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
+                    lineHeight: 1.5
                   }}
                 >
                   Reforço escolar personalizado e estratégico para Ensino Fundamental e Médio.
@@ -84,8 +93,8 @@ export function IntroSection(): React.ReactElement {
                     size="large"
                     onClick={() => trackWhatsAppClick()}
                     style={{
-                      height: '64px',
-                      padding: '0 48px',
+                      height: screens.lg ? '64px' : '56px',
+                      padding: screens.lg ? '0 48px' : '0 32px',
                       fontSize: '1.125rem',
                       fontWeight: 600,
                       boxShadow: '0 10px 25px rgba(255, 107, 74, 0.4)',
@@ -102,27 +111,27 @@ export function IntroSection(): React.ReactElement {
                   <div 
                     style={{
                       position: 'absolute',
-                      inset: '-20px',
+                      inset: '-15px',
                       backgroundColor: '#F4B400',
                       borderRadius: '50%',
                       opacity: 0.15,
-                      filter: 'blur(45px)'
+                      filter: 'blur(35px)'
                     }}
                   />
                   <div 
                     style={{
                       position: 'relative',
-                      width: screens.lg ? '420px' : '280px',
-                      height: screens.lg ? '420px' : '280px',
+                      width: screens.lg ? '420px' : 'min(75vw, 300px)',
+                      height: screens.lg ? '420px' : 'min(75vw, 300px)',
                       borderRadius: '50%',
                       overflow: 'hidden',
-                      border: '8px solid #FF6B4A',
+                      border: screens.lg ? '8px solid #FF6B4A' : '6px solid #FF6B4A',
                       boxShadow: '0 30px 60px -12px rgba(0, 0, 0, 0.2)'
                     }}
                   >
                     <Image
                       src="/emily.jpeg"
-                      alt="Emily Santanfa"
+                      alt="Emily Santana"
                       preview={false}
                       style={{ 
                         width: '100%', 
