@@ -1,93 +1,51 @@
 "use client"
 
 import React from "react"
-import { Row, Col, Typography, Card, Space, ConfigProvider, Flex } from "antd"
-import { GraduationCap, Target, Heart } from "lucide-react"
-import { TeacherFeature } from "@/types/teacher"
+import { Typography, Card, ConfigProvider, Flex, Grid } from "antd"
+import { ReadOutlined, AimOutlined, HeartOutlined } from "@ant-design/icons"
 
 const { Title, Paragraph, Text } = Typography
-
-const FeatureCard = ({ icon, title, description, bgColor }: TeacherFeature) => (
-  <Card
-    hoverable
-    styles={{ body: { padding: '40px 24px' } }}
-    style={{ 
-      borderRadius: '24px', 
-      height: '100%', 
-      textAlign: 'center',
-      border: 'none',
-      boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
-    }}
-  >
-    <Flex vertical align="center" gap={20}>
-      <div 
-        style={{ 
-          width: '64px', 
-          height: '64px', 
-          backgroundColor: bgColor, 
-          borderRadius: '50%', 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'center',
-          fontSize: '32px',
-          color: '#fff'
-        }}
-      >
-        {icon}
-      </div>
-      <Title level={4} style={{ color: "#002B5B", margin: 0 }}>{title}</Title>
-      <Text type="secondary" style={{ fontSize: '1rem' }}>{description}</Text>
-    </Flex>
-  </Card>
-)
+const { useBreakpoint } = Grid
 
 export function AboutSection(): React.ReactElement {
-  const features: TeacherFeature[] = [
-    {
-      icon: <GraduationCap size={32} />,
-      title: "Formada pelo IFF",
-      description: "Formação sólida e qualificada",
-      bgColor: "#002B5B",
-    },
-    {
-      icon: <Target size={32} />,
-      title: "Plano Estratégico",
-      description: "Estudos personalizados para cada aluno",
-      bgColor: "#FF6B4A",
-    },
-    {
-      icon: <Heart size={32} />,
-      title: "Acolhimento",
-      description: "Ambiente seguro e acolhedor",
-      bgColor: "#F4B400",
-    },
+  const screens = useBreakpoint()
+
+  const features = [
+    { icon: <ReadOutlined />, title: "Formada pelo IFF", desc: "Formação sólida e qualificada", color: "#002B5B" },
+    { icon: <AimOutlined />, title: "Plano Estratégico", desc: "Estudos personalizados", color: "#FF6B4A" },
+    { icon: <HeartOutlined />, title: "Acolhimento", desc: "Ambiente seguro e presente", color: "#F4B400" },
   ]
 
   return (
-    <ConfigProvider theme={{ token: { borderRadius: 24 } }}>
-      <section style={{ padding: '100px 24px', backgroundColor: '#F9F9F9' }}>
+    <ConfigProvider theme={{ token: { borderRadius: 32 } }}>
+      <section style={{ 
+        padding: screens.lg ? '100px 24px' : '60px 24px', 
+        backgroundColor: '#002B5B' 
+      }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <Space orientation="vertical" size={60} style={{ width: '100%', textAlign: 'center' }}>
-            
-            <Space orientation="vertical" size={16} style={{ maxWidth: '800px' }}>
-              <Title level={2} style={{ color: "#002B5B", fontSize: 'clamp(2rem, 5vw, 2.5rem)', margin: 0 }}>
+          <Flex vertical gap={60} align="center">
+            <div style={{ textAlign: 'center', maxWidth: '800px' }}>
+              <Title level={2} style={{ color: "#ffffff", fontSize: 'clamp(2rem, 5vw, 2.5rem)', margin: 0 }}>
                 Quem é Emily Santana?
               </Title>
-              <Paragraph style={{ fontSize: '1.2rem', color: '#4B5563', lineHeight: 1.8 }}>
-                Formada pelo IFF com experiência em orientação pedagógica, Emily oferece um acompanhamento educacional que
-                vai além das notas, focando no desenvolvimento integral do aluno.
+              <Paragraph style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.8, marginTop: '24px' }}>
+                Profissional da Educação formada pelo Instituto Federal Fluminense, 
+                Emily oferece um acompanhamento estratégico que transforma dificuldades em avanços reais.
               </Paragraph>
-            </Space>
+            </div>
 
-            <Row gutter={[24, 24]} justify="center">
-              {features.map((feature, index) => (
-                <Col xs={24} md={8} key={index}>
-                  <FeatureCard {...feature} />
-                </Col>
+            <Flex vertical={!screens.md} gap={24} style={{ width: '100%' }} justify="center">
+              {features.map((item, index) => (
+                <Card key={index} style={{ flex: 1, borderRadius: '24px', textAlign: 'center', border: 'none' }} styles={{ body: { padding: '32px 24px' } }}>
+                  <Flex vertical align="center" gap={16}>
+                    <div style={{ fontSize: '32px', color: item.color }}>{item.icon}</div>
+                    <Title level={4} style={{ color: "#002B5B", margin: 0 }}>{item.title}</Title>
+                    <Text type="secondary">{item.desc}</Text>
+                  </Flex>
+                </Card>
               ))}
-            </Row>
-            
-          </Space>
+            </Flex>
+          </Flex>
         </div>
       </section>
     </ConfigProvider>
