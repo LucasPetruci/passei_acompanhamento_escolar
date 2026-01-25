@@ -76,7 +76,7 @@ export function MethodologySection(): React.ReactElement {
               icon={<BookOutlined />}
               title="Aprendizado Colaborativo"
               description="Desenvolvemos autonomia e estratégias de estudo eficientes."
-              features={["Turmas reduzidas", "Foco no rendimento", "Autonomia escolar"]}
+              features={["Turmas reduzidas", "Foco no rendimento", "Metodoloogia personalizada para cada aluno"]}
               iconBg="#002B5B"
             />
           </Flex>
@@ -98,7 +98,7 @@ export function MethodologySection(): React.ReactElement {
           >
             <div style={{ flex: 1, textAlign: screens.lg ? 'left' : 'center' }}>
               <Title level={2} style={{ color: "#ffffff", fontSize: 'clamp(2.2rem, 5vw, 3rem)', margin: 0 }}>
-                Educação Especial (DUA)
+                Desenho Universal da Aprendizagem  (DUA)
               </Title>
               <Paragraph style={{ color: "rgba(255,255,255,0.9)", fontSize: '1.2rem', marginTop: '24px' }}>
                 Atendimento individualizado guiado pelo Desenho Universal da Aprendizagem.

@@ -1,5 +1,5 @@
 import { AboutSection } from "@/components/AboutSection"
-import { IntroSection } from "@/components/introSection"
+import { IntroSection } from "@/components/IntroSection"
 import { MethodologySection } from "@/components/MethodologyCard"
 import type React from "react"
 
