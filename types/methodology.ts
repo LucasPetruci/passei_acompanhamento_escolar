@@ -5,7 +5,12 @@ export interface MethodologyCardProps {
   title: string;
   description: string;
   features: string[];
-  gradient: string;
-  borderColor: string;
   iconBg: string;
+}
+
+export interface MethodologySectionProps {
+  title: string;
+  subtitle: string;
+  backgroundColor: string;
+  cards: MethodologyCardProps[];
 }
