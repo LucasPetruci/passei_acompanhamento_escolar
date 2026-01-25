@@ -1,11 +1,12 @@
 "use client"
 
 import React from "react"
-import { Row, Col, Typography, Card, ConfigProvider, Flex, List } from "antd"
+import { Row, Col, Typography, Card, ConfigProvider, Flex, Grid } from "antd"
 import { BookOutlined, ExceptionOutlined, CheckOutlined } from "@ant-design/icons"
 import { MethodologyCardProps } from "@/types/methodology"
 
 const { Title, Paragraph, Text } = Typography
+const { useBreakpoint } = Grid
 
 const MethodologyCard = ({
   icon,
@@ -54,31 +55,22 @@ const MethodologyCard = ({
         </Paragraph>
       </div>
 
-      <List
-        style={{ width: '100%' }}
-        dataSource={features}
-        renderItem={(item: string) => (
-          <List.Item 
-            style={{ 
-              border: 'none', 
-              padding: '6px 0', 
-              display: 'flex', 
-              justifyContent: 'flex-start',
-              alignItems: 'flex-start' 
-            }}
-          >
-            <Flex align="start" gap={12}>
-              <CheckOutlined style={{ color: '#F4B400', marginTop: '4px', fontWeight: 'bold' }} />
-              <Text style={{ color: '#6B7280', textAlign: 'left' }}>{item}</Text>
-            </Flex>
-          </List.Item>
-        )}
-      />
+      {/* Substituído <List> por <Flex> para evitar erros de hidratação */}
+      <Flex vertical gap={12} style={{ width: '100%' }}>
+        {features.map((feature, index) => (
+          <Flex key={index} align="start" gap={12}>
+            <CheckOutlined style={{ color: '#F4B400', marginTop: '4px', fontWeight: 'bold' }} />
+            <Text style={{ color: '#6B7280', textAlign: 'left' }}>{feature}</Text>
+          </Flex>
+        ))}
+      </Flex>
     </Flex>
   </Card>
 )
 
 export function MethodologySection(): React.ReactElement {
+  const screens = useBreakpoint()
+
   const methodologies: MethodologyCardProps[] = [
     {
       icon: <BookOutlined />,
@@ -104,7 +96,7 @@ export function MethodologySection(): React.ReactElement {
 
   return (
     <ConfigProvider theme={{ token: { borderRadius: 24 } }}>
-      <section style={{ padding: '100px 24px', backgroundColor: '#ffffff' }}>
+      <section style={{ padding: screens.lg ? '100px 24px' : '60px 24px', backgroundColor: '#ffffff' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <Flex vertical gap={60}>
             <div style={{ textAlign: 'center' }}>
